@@ -6,7 +6,12 @@ RSpotify.authenticate(config["spotify"]["client_id"], config["spotify"]["client_
 
 exit(0) if ARGV.length == 0
 
-albums = RSpotify::Album.search(ARGV[0])
-albums.each do |album|
-  puts "#{album.name} : #{album.external_urls['spotify']}"
+def albums_print(album_name)
+  albums = RSpotify::Album.search(album_name)
+
+  albums.each do |album|
+    puts "#{album.name} : #{album.external_urls['spotify']}"
+  end
 end
+
+albums_print(ARGV[0])
