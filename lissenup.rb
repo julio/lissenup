@@ -4,13 +4,9 @@ require 'yaml'
 config = YAML.load_file('config.yml')
 RSpotify.authenticate(config["spotify"]["client_id"], config["spotify"]["client_secret"])
 
-albums = RSpotify::Album.search('the song remains the same')
+exit(0) if ARGV.length == 0
 
+albums = RSpotify::Album.search(ARGV[0])
 albums.each do |album|
-  puts album.name
-  puts ''
-  album.tracks.each do |track|
-    puts track.name
-  end
-  puts '--'
+  puts "#{album.name} : #{album.external_urls['spotify']}"
 end
